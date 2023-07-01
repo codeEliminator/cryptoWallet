@@ -33,9 +33,9 @@ export default function App() {
                   <Icon 
                     name={focused ? 'home' : 'home-outline'} 
                     size={20} 
-                    color={focused ? 'black' : 'grey'} 
+                    color={focused ? '#fff' : '#DCDCDC'} 
                   />
-                  <Text style={{color: focused ? 'black' : 'grey'}}>Home</Text>
+                  <Text style={{color: focused ? '#fff' : '#DCDCDC'}}>Home</Text>
                 </View>
               )
           }} name="Home" component={Home} />
@@ -45,9 +45,9 @@ export default function App() {
                 <Icon 
                   name={focused ? 'search' : 'search-outline'} 
                   size={20} 
-                  color={focused ? 'black' : 'grey'} 
+                  color={focused ? '#fff' : '#DCDCDC'} 
                 />
-                <Text style={{color: focused ? 'black' : 'grey'}}>Search</Text>
+                <Text style={{color: focused ? '#fff' : '#DCDCDC'}}>Search</Text>
               </View>
             )}} name="Search" component={Search} />
         </Tab.Navigator>
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    backgroundColor: 'aqua',
+    backgroundColor: 'hsl(180, 100%, 20%)'
   }
 });
