@@ -2,16 +2,11 @@ import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import NavigationBar from './Components/Navigation/Navigation.js';
 
-
-
 export default function App() {
   return (
-    
     <View style={styles.container}>
      <NavigationBar />
     </View>
-    
-    
   );
 }
 
@@ -24,7 +19,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
-    // alignItems: 'center',
     backgroundColor: 'black'
   },
 });
