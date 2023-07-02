@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity, FlatList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import Icon from 'react-native-vector-icons/Ionicons.js';
 import buyImage from '../../assets/buyImage.png'
@@ -7,6 +7,7 @@ import topUpImage from '../../assets/topUpImage.png'
 import withdrawImage from '../../assets/withdrawImage.png'
 import profileImage from '../../assets/profileImage.jpg'
 import ActionCenter from '../ActionCenter/ActionCenter';
+import { coins } from '../../api/coins';
 
 export default function Home() {
   return (
@@ -42,7 +43,36 @@ export default function Home() {
               <ActionCenter imgSrc={withdrawImage} imgTxt={'Withdraw'}></ActionCenter>
             </View>
           </View>
-        
+        </View>
+        <View style={styles.accAssets}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, width: '89%'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 25}}>My Assets</Text>
+            <TouchableOpacity>
+              <Text style={{color: '#040', fontSize: 22, fontStyle:'italic'}}>See All</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <FlatList 
+              keyExtractor={(item) => item.id}
+              data={coins}
+              horizontal
+              renderItem={({item})=>(
+                
+                <View style={{position: 'relative', flexDirection:'column', height: hp('20%'), width: wp('75%'), 
+                  borderWidth: 1, borderColor: '#000', borderRadius: 10, marginRight: 10, marginTop: 15, backgroundColor: '#DCDCDC'
+                }}
+                >
+                  <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'center', paddingHorizontal: 10, paddingTop: 20}}>
+                    <Image style={{height: 25, width: 25}} source={item.image} />
+                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.currency}/USDT</Text>
+                  </View>
+                </View>
+                
+                
+              )}
+            />
+          </View>
+          
         </View>
       </View>
     </View>
@@ -104,5 +134,9 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2, 
     shadowRadius: 7,
+  },
+  accAssets: {
+    flexDirection: 'column',
+    alignItems:'center',
   }
 });
