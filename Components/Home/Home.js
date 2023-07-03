@@ -99,7 +99,7 @@ export default function Home() {
                     <Text style={{fontSize: 10, }}>BNB/USDT</Text>
                   </View>
                 </View>
-                <View style={{flexDirection: 'column', alignContent: 'center', justifyContent: 'center'}}>
+                <View style={{flexDirection: 'column', marginRight:5, justifyContent: 'center', alignContent: 'center', alignItems: 'flex-end'}}>
                   <Text style={{fontSize: 18 }}>$ {item.amount}</Text>
                   <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     <Icon name={item.type == 'I' ? 'arrow-up-outline' : 'arrow-down-outline'} 
