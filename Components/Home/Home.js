@@ -8,6 +8,7 @@ import withdrawImage from '../../assets/withdrawImage.png'
 import profileImage from '../../assets/profileImage.jpg'
 import ActionCenter from '../ActionCenter/ActionCenter';
 import { coins } from '../../api/coins';
+import Indicator from '../Indicator/Indicator';
 
 export default function Home() {
   return (
@@ -51,30 +52,72 @@ export default function Home() {
               <Text style={{color: '#040', fontSize: 22, fontStyle:'italic'}}>See All</Text>
             </TouchableOpacity>
           </View>
-          <View style={{flexDirection: 'row'}}>
-            <FlatList 
+          <FlatList 
               keyExtractor={(item) => item.id}
               data={coins}
               horizontal
+              showsHorizontalScrollIndicator={false}
               renderItem={({item})=>(
                 
-                <View style={{position: 'relative', flexDirection:'column', height: hp('20%'), width: wp('75%'), 
-                  borderWidth: 1, borderColor: '#000', borderRadius: 10, marginRight: 10, marginTop: 15, backgroundColor: '#DCDCDC'
+                <View style={{position: 'relative', flexDirection:'column', height: hp('13%'), width: wp('55%'), 
+                  borderWidth: 1, borderColor: '#000', borderRadius: 10, marginRight: 10, marginTop: 15, backgroundColor: '#fff'
                 }}
                 >
-                  <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'center', paddingHorizontal: 10, paddingTop: 20}}>
-                    <Image style={{height: 25, width: 25}} source={item.image} />
-                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.currency}/USDT</Text>
+                  <View style={{flexDirection: 'column', alignItems: 'center',justifyContent: 'center', paddingHorizontal: 10, paddingTop: 20}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={{height: 25, width: 25, marginRight: 10}} source={item.image} />
+                      <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.currency} / USDT</Text>
+                    </View>
+                    <View style={{flexDirection: 'column', marginTop: 10, justifyContent: 'space-around', alignItems: 'center'}}>
+                      <View style={{flexDirection: 'column', }}>
+                        <Text style={{fontWeight: 'bold', color: '#333', fontSize: 20}}>${item.amount}</Text>
+                        <Indicator type={item.type} percentage_change={item.changes}></Indicator>
+                      </View>
+                      
+                    </View>
                   </View>
                 </View>
-                
-                
               )}
             />
-          </View>
-          
         </View>
-      </View>
+        <View style={styles.accMarket}>
+          <Text style={{fontSize: 25, fontWeight: 'bold',marginTop:10, marginLeft: 26, marginBottom: 10}}>Market</Text>
+          <FlatList 
+            keyExtractor={(item)=>item.id}
+            data={coins}
+            style={{height: 285}}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => (
+              <View style={{width: '100%', alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', height: hp('7%'), width: '95%', borderWidth: 1, borderColor: '#000',
+                  borderRadius: 15, justifyContent: 'space-between', marginBottom: 10, backgroundColor: '#fff'}}
+              >
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image style={{height: '60%'}} source={item.image} resizeMode='contain' />
+                  <View style={{flexDirection: 'column', justifyContent: 'flex-start'}}>
+                    <Text style={{fontStyle: 'italic', color: 'black', fontSize: 20}}>{item.currency}</Text>
+                    <Text style={{fontSize: 10, }}>BNB/USDT</Text>
+                  </View>
+                </View>
+                <View style={{flexDirection: 'column', alignContent: 'center', justifyContent: 'center'}}>
+                  <Text style={{fontSize: 18 }}>$ {item.amount}</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <Icon name={item.type == 'I' ? 'arrow-up-outline' : 'arrow-down-outline'} 
+                      color={item.type == 'I' ? 'green' : 'red'} />
+                    <Text style={{color: item.type == 'I' ? 'green' : 'red', fontWeight: 'bold'}}>
+                      {item.changes}
+                    </Text>
+
+                  </View>
+                </View>
+              </View>
+              
+            </View>
+              
+            )}
+          />
+        </View>
+      </View>      
     </View>
     
     
